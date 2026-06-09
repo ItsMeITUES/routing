@@ -209,18 +209,15 @@ class DVrouter(Router):
             debug_str = f"Updated at router {self.addr} after new link: {printdistance_vector}, forwarding_table={printforwarding_table}"
             print(debug_str)
 
-
-
         # Set the special node to 1 to indicate a new link has been added
         self.distance_vector[-1] = 1
 
-        if(newForwardingInfo):
-            for out_port in self.links:
-                #print(f"Broadcasting updated distance vector from {self.addr} to neighbor {port}")
+        for out_port in self.links:
+            #print(f"Broadcasting updated distance vector from {self.addr} to neighbor {port}")
 
-                packet = Packet(Packet.ROUTING, src_addr=self.addr, dst_addr=None)
-                packet.content = json.dumps(self.distance_vector)
-                self.send(out_port, packet)
+            packet = Packet(Packet.ROUTING, src_addr=self.addr, dst_addr=None)
+            packet.content = json.dumps(self.distance_vector)
+            self.send(out_port, packet)
 
         self.distance_vector[-1] = 0
 
