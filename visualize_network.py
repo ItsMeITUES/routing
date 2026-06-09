@@ -244,7 +244,7 @@ def main():
         type=str,
         choices=["DV", "LS"],
         nargs="?",
-        default=None,
+        default="DV",
         help="DV for DVrouter and LS for LSrouter. If not provided, Router is used.",
     )
     args = parser.parse_args()
